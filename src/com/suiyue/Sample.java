@@ -47,7 +47,7 @@ public class Sample {
             System.out.println(bucket.getName());
         }
     }
-    public static void PutObject(int count, BosClient client, String bucketName, String objectKey) throws FileNotFoundException {
+    public synchronized static void PutObject(int count, BosClient client, String bucketName, String objectKey) throws FileNotFoundException {
         // 获取指定文件
         File file = new File("result.txt");
         // 以文件形式上传Object
@@ -56,7 +56,7 @@ public class Sample {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//可以方便地修改日期格式
         String timeString = dateFormat.format(now);
         String content = count + " " + timeString + " " + putObjectFromFileResponse.getETag() + "\n";
-        appendFile("result_baidu.txt", content);
+        appendFile("result_baidu_1.txt", content);
     }
 
     public static void appendFile(String fileName, String content) {
